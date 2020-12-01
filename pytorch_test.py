@@ -9,9 +9,15 @@ train_data = torchvision.datasets.CIFAR10(
 
 train_loader = torch.utils.data.DataLoader(
     train_data,
+<<<<<<< HEAD
     batch_size = 32,
     shuffle = True,
     num_workers = 32
+=======
+    batch_size = 48,
+    shuffle = True,
+    num_workers = 48
+>>>>>>> a9470fe948d6932c879b022ea0b9f825e4c560a3
     )
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -47,3 +53,5 @@ for epoch in range(epochs):
     
         running_loss += loss.item()
 
+
+torch.save(network.state_dict(),'saved_model.pth')
