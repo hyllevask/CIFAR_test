@@ -19,7 +19,8 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 epochs = 50
 
 network = torchvision.models.resnet18(pretrained=True)
-#network._modules['conv1'] = torch.nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+torch.nn.Linear(in_features=512, out_features=10, bias=True)
+network._modules['fc'] = torch.nn.Linear(in_features=512, out_features=10, bias=True)
 network.to(device)
 
 criterion = torch.nn.CrossEntropyLoss()
