@@ -9,16 +9,16 @@ train_data = torchvision.datasets.CIFAR10(
 
 train_loader = torch.utils.data.DataLoader(
     train_data,
-    batch_size = 4,
+    batch_size = 32,
     shuffle = True,
-    num_workers = 4
+    num_workers = 32
     )
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-epochs = 10
+epochs = 50
 
-network = torchvision.models.resnet18()
+network = torchvision.models.resnet18(pretrained=True)
 #network._modules['conv1'] = torch.nn.Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
 network.to(device)
 
@@ -32,6 +32,7 @@ p_bar = tqdm.tqdm(total = len(train_loader), desc='Batch')
 print(device)
 
 for epoch in range(epochs):
+    p_bar = tqdm.tqdm(total = len(train_loader), desc='Batch')
     running_loss = 0.0
     for i, data in enumerate(train_loader):
         p_bar.update(1)
